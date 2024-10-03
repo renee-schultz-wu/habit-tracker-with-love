@@ -1,9 +1,9 @@
 const { Router } = require("express");
 const router = Router();
 
-const { viewALL } = require("../controllers/view")
+const { viewTally } = require("../controllers/view")
 
-router.get('/', viewALL);
+router.get('/', viewTally);
 
 
 module.exports = router; 

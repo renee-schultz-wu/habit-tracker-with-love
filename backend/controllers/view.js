@@ -1,8 +1,14 @@
 const db = require("../db/queries");
 
 async function viewALL(req, res) {
-    const data = await db.viewALL();
-    res.render("index", { daten: data });
+    const data = await db.viewWeek();
+    //res.render("index", { daten: data });
+    res.json(data);
 }
 
-module.exports = { viewALL }
+async function viewTally(req, res) {
+    const data = await db.viewTally();
+    res.json(data);
+}
+
+module.exports = { viewALL, viewTally }
