@@ -11,4 +11,14 @@ async function viewTally(req, res) {
     res.json(data);
 }
 
-module.exports = { viewALL, viewTally }
+async function viewUsers(req, res) {
+    const data = await db.viewUsers();
+    res.json(data);
+}
+
+async function viewTasks(req, res) {
+    const data = await db.viewTasks();
+    res.json(data);
+}
+
+module.exports = { viewALL, viewTally, viewTasks, viewUsers }

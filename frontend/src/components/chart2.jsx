@@ -43,13 +43,14 @@ function Chart() {
                 const userIndex = users.indexOf(item.name);
                 if (dayIndex !== -1 && taskIndex !== -1 && userIndex !== -1) {
                     updatedCompletion[userIndex][taskIndex][dayIndex] = item.complete;
+                    console.log(userIndex,taskIndex)
                 }
             });
             setCompletion(updatedCompletion);
         }
-    }, [completionData, users, tasks]);
+    }, [completion, completionData, users, tasks]);
 
-    console.log(completion)
+    
 
     const handleTaskClick = (taskIndex, dayIndex, userIndex) => {
         const updatedCompletion = [...completion[userIndex]];

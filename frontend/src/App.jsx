@@ -1,6 +1,6 @@
 import "./App.css";
 
-import Chart from "./components/chart";
+import Chart from "./components/chart2";
 import Tally from "./components/tally";
 
 function App() {

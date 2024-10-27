@@ -1,7 +1,7 @@
 const pool = require("./pool");
 
 async function viewWeek() {
-    const { rows } = await pool.query("SELECT * FROM timelog WHERE date >= date_trunc('week', ( CURRENT_DATE  + interval '1' day)) - interval '1' day");
+    const { rows } = await pool.query("SELECT * FROM timelog WHERE date >= date_trunc('week', ( CURRENT_DATE  + interval '1' day)) - interval '28' day");
     return rows;
 }
 
@@ -21,5 +21,14 @@ async function addOrUpdate(file) {
     return;
 }
 
+async function viewTasks() {
+    const { rows } = await pool.query("SELECT task FROM tasklist");
+    return rows;
+}
 
-module.exports = { viewWeek, viewTally, addOrUpdate }
+async function viewUsers() {
+    const { rows } = await pool.query("SELECT name FROM users");
+    return rows;
+}
+
+module.exports = { viewWeek, viewTally, addOrUpdate, viewTasks, viewUsers }
