@@ -5,6 +5,13 @@ async function viewWeek() {
     return rows;
 }
 
+async function countWeeklyTally(name) {
+    const text = "select count(*) from timelog where person = ($1) and complete = true and date >= date_trunc('week', ( CURRENT_DATE  + interval '1' day)) - interval '1' day"
+    const values = [name];
+    const { rows } = await pool.query(text, values)
+    return rows;
+}
+
 async function viewTally() {
     const { rows } = await pool.query("SELECT * FROM users");
     return rows;
@@ -31,4 +38,4 @@ async function viewUsers() {
     return rows;
 }
 
-module.exports = { viewWeek, viewTally, addOrUpdate, viewTasks, viewUsers }
+module.exports = { viewWeek, countWeeklyTally, viewTally, addOrUpdate, viewTasks, viewUsers }

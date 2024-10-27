@@ -21,4 +21,9 @@ async function viewTasks(req, res) {
     res.json(data);
 }
 
-module.exports = { viewALL, viewTally, viewTasks, viewUsers }
+async function countWeeklyTally(req, res) {
+    const data = await db.countWeeklyTally(req.params.id);
+    res.json(data);
+}
+
+module.exports = { viewALL, viewTally, viewTasks, viewUsers, countWeeklyTally }
