@@ -27,7 +27,6 @@ function getDays() {
 }
 
 
-
 function Chart() {
     const { data: users } = useFetchData('http://localhost:3000/users');
     const { data: tasks } = useFetchData('http://localhost:3000/tasks');
