@@ -26,6 +26,8 @@ function getDays() {
     return Object.keys(intervalWeek).map((key) => intervalWeek[key].toDateString());
 }
 
+
+
 function Chart() {
     const { data: users } = useFetchData('http://localhost:3000/users');
     const { data: tasks } = useFetchData('http://localhost:3000/tasks');
@@ -43,12 +45,14 @@ function Chart() {
                 const userIndex = users.indexOf(item.name);
                 if (dayIndex !== -1 && taskIndex !== -1 && userIndex !== -1) {
                     updatedCompletion[userIndex][taskIndex][dayIndex] = item.complete;
-                    console.log(userIndex,taskIndex)
+                    setCompletion(updatedCompletion);
                 }
             });
-            setCompletion(updatedCompletion);
+            
         }
-    }, [completion, completionData, users, tasks]);
+    });
+    
+
 
     
 
@@ -60,6 +64,7 @@ function Chart() {
             newCompletion[userIndex] = updatedCompletion;
             return newCompletion;
         });
+        console.log(dayIndex, taskIndex, userIndex);
         // ... (fetch logic to update the server)
     };
 
