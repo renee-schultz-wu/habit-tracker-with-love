@@ -42,18 +42,17 @@ function Chart() {
             completionData.forEach(item => {
                 const dayIndex = new Date(item.date).getDay();
                 const taskIndex = tasks.indexOf(item.task);
-                const userIndex = users.indexOf(item.name);
+                const userIndex = users.indexOf(item.person);
+                console.log(item, tasks, users)
+                console.log(dayIndex, userIndex, taskIndex)
                 if (dayIndex !== -1 && taskIndex !== -1 && userIndex !== -1) {
                     updatedCompletion[userIndex][taskIndex][dayIndex] = item.complete;
-                    setCompletion(updatedCompletion);
+                    console.log(updatedCompletion)
                 }
             });
-            
+            setCompletion(updatedCompletion);
         }
     });
-    
-
-
     
 
     const handleTaskClick = (taskIndex, dayIndex, userIndex) => {
@@ -65,7 +64,34 @@ function Chart() {
             return newCompletion;
         });
         console.log(dayIndex, taskIndex, userIndex);
+        
         // ... (fetch logic to update the server)
+        const updatedData = {
+            person: users[userIndex].name,
+            task: tasks[taskIndex].task,
+            date: days[dayIndex],
+            complete: updatedCompletion[taskIndex][dayIndex],
+        };
+
+        fetch('http://localhost:3000/update', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(updatedData),
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log('Update successful:', data);
+        })
+        .catch(error => {
+            console.error('Error updating completion:', error);
+        });
     };
 
     const renderCell = (taskIndex, dayIndex) => {

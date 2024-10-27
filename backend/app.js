@@ -18,7 +18,7 @@ const completeRouter = require("./routes/complete");
 
 
 app.use('/tally', tallyRouter);
-app.use('/complete', completeRouter);
+app.use('/update', completeRouter);
 app.use('/view', indexRouter);
 app.use('/', indexRouter);
 

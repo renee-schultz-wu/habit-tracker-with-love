@@ -1,7 +1,7 @@
 const pool = require("./pool");
 
 async function viewWeek() {
-    const { rows } = await pool.query("SELECT * FROM timelog WHERE date >= date_trunc('week', ( CURRENT_DATE  + interval '1' day)) - interval '28' day");
+    const { rows } = await pool.query("SELECT * FROM timelog WHERE date >= date_trunc('week', ( CURRENT_DATE  + interval '1' day)) - interval '1' day");
     return rows;
 }
 
