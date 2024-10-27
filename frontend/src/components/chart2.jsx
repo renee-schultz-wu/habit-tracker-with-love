@@ -41,18 +41,15 @@ function Chart() {
             const updatedCompletion = completion.map(userComp => userComp.map(taskComp => [...taskComp]));
             completionData.forEach(item => {
                 const dayIndex = new Date(item.date).getDay();
-                const taskIndex = tasks.indexOf(item.task);
-                const userIndex = users.indexOf(item.person);
-                console.log(item, tasks, users)
-                console.log(dayIndex, userIndex, taskIndex)
+                const taskIndex = tasks.findIndex(task => task.task === item.task);
+                const userIndex = users.findIndex(user => user.name === item.person);
                 if (dayIndex !== -1 && taskIndex !== -1 && userIndex !== -1) {
                     updatedCompletion[userIndex][taskIndex][dayIndex] = item.complete;
-                    console.log(updatedCompletion)
                 }
             });
             setCompletion(updatedCompletion);
         }
-    });
+    },[completionData, users, tasks]);
     
 
     const handleTaskClick = (taskIndex, dayIndex, userIndex) => {
@@ -63,7 +60,6 @@ function Chart() {
             newCompletion[userIndex] = updatedCompletion;
             return newCompletion;
         });
-        console.log(dayIndex, taskIndex, userIndex);
         
         // ... (fetch logic to update the server)
         const updatedData = {
